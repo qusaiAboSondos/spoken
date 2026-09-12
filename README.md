@@ -66,9 +66,49 @@ pip install -r requirements.txt
 ## Status
 
 - [x] Step 1: repo scaffold + environment
-- [ ] Step 2: get the data
-- [ ] Step 3: feature extraction
-- [ ] Step 4: train classifiers
-- [ ] Step 5: evaluation + comparison
-- [ ] Step 6: generalization experiment
+- [x] Step 2: data plan + download instructions (`data/README.md`) — **the
+      actual download must happen on your machine**, not in this sandbox
+      (zenodo.org / datashare.ed.ac.uk / openslr.org / huggingface.co /
+      kaggle.com are all blocked by this session's network policy)
+- [x] Step 3: feature extraction pipeline (`src/features.py`,
+      `src/extract_features.py`) — verified end-to-end on synthetic data
+- [x] Step 4: train classifiers (`src/train.py`)
+- [x] Step 5: evaluation + comparison (`src/evaluate.py`,
+      `src/run_experiment.py`) — verified end-to-end on synthetic data
+- [ ] Step 6: generalization experiment — code is ready
+      (`run_experiment.py` already reports per-attack-type accuracy and
+      accepts any train/test pair, e.g. 2019 LA train vs 2021 DF eval); just
+      needs the real downloaded data to run on
 - [ ] Step 7: report
+
+## Running the pipeline once you have real data
+
+```bash
+# 1) subsample the official protocol to something tractable
+python -m src.subsample_protocol --protocol data/protocols/ASVspoof2019.LA.cm.train.trn.txt \
+    --n-per-class 1500 --output data/protocols/train_subset.txt
+
+# 2) extract + cache features (repeat for dev / 2021 DF eval subsets)
+python -m src.extract_features --protocol data/protocols/train_subset.txt \
+    --audio-dir data/raw/ASVspoof2019/LA/ASVspoof2019_LA_train/flac \
+    --features mfcc lfcc spectral --output data/features/train.npz
+
+# 3) run the full comparison (MFCC+SVM, LFCC+SVM, MFCC+RF, feature combos)
+python -m src.run_experiment --train-features data/features/train.npz \
+    --test-features data/features/dev.npz --output-dir results/
+
+# 4) generalization: same command, but test-features pointing at the
+#    ASVspoof2021 DF eval features instead of the 2019 LA dev features
+```
+
+You can sanity-check all of this right now, without any real data, using the
+synthetic generator:
+
+```bash
+python -m src.make_dummy_data --output-dir data/raw/dummy --n-per-class 30
+python -m src.extract_features --protocol data/protocols/dummy_protocol.txt \
+    --audio-dir data/raw/dummy --features mfcc lfcc spectral \
+    --output data/features/dummy.npz
+python -m src.run_experiment --train-features data/features/dummy.npz \
+    --test-features data/features/dummy.npz --output-dir results/dummy_run
+```
