@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# raw audio + downloaded archives (too large for git)
+data/raw/
+data/*.tar.gz
+data/*.zip
+data/*.flac
+data/*.wav
+
+# cached extracted features (regenerable, can be large)
+data/features/
+*.npz
+
+# trained models
+results/models/*.joblib
+
+# local env
+.venv/
+venv/
