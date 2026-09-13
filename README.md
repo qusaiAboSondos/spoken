@@ -51,7 +51,13 @@ data/
   protocols/           ASVspoof protocol .txt files (small, committed)
   raw/                 downloaded audio (gitignored, not committed)
   features/            cached extracted features (gitignored)
-results/                metrics, plots, trained models (models gitignored)
+notebooks/
+  Spoken_Deepfake_Detection.ipynb  ready-to-run Colab notebook: clones this
+                                    repo, downloads ASVspoof2019 LA, extracts
+                                    features, runs the experiment comparison
+                                    (handy when git/wget/unzip aren't set up
+                                    locally, e.g. on Windows)
+results/                metrics, plots, trained models (gitignored, regenerated)
 report/                 IEEE report source
 ```
 
