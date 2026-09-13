@@ -1,0 +1,20 @@
+{
+  "accuracy": 0.9,
+  "precision_spoof": 0.9,
+  "recall_spoof": 0.9,
+  "f1_spoof": 0.9,
+  "roc_auc": 0.9623502222222222,
+  "eer": 0.09933333333333333,
+  "eer_threshold": 0.5039012130650166,
+  "confusion_matrix": [
+    [
+      675,
+      75
+    ],
+    [
+      75,
+      675
+    ]
+  ],
+  "n_samples": 1500
+}
