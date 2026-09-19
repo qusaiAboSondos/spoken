@@ -342,9 +342,9 @@ const contribution = [
         tableHeader: true,
         children: [tableCell("Member", { header: true, width: 1400 }), tableCell("Contribution", { header: true, width: 3460 })],
       }),
-      new TableRow({ children: [tableCell("Qusai Abu Sondos", { width: 1400 }), tableCell("[to be completed with the team]", { width: 3460 })] }),
-      new TableRow({ children: [tableCell("Laith Shadeh", { width: 1400 }), tableCell("[to be completed with the team]", { width: 3460 })] }),
-      new TableRow({ children: [tableCell("Mohammad Alabed", { width: 1400 }), tableCell("[to be completed with the team]", { width: 3460 })] }),
+      new TableRow({ children: [tableCell("Qusai Abu Sondos", { width: 1400 }), tableCell("Reviewed and validated the code, pipeline, and experimental results.", { width: 3460 })] }),
+      new TableRow({ children: [tableCell("Laith Shadeh", { width: 1400 }), tableCell("Wrote the final report.", { width: 3460 })] }),
+      new TableRow({ children: [tableCell("Mohammad Alabed", { width: 1400 }), tableCell("Prepared the presentation slides.", { width: 3460 })] }),
     ],
     borders: {
       top: { style: BorderStyle.SINGLE, size: 4, color: "444444" },
